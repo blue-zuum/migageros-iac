@@ -50,6 +50,9 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
+      - name: Asegurar que el Resource Group existe
+        run: az group create --name ${{ env.RG_DEV }} --location ${{ env.AZURE_LOCATION }}
+
       - name: Ejecutar Simulación What-If
         run: |
           az deployment group what-if `
@@ -69,6 +72,9 @@ jobs:
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
+
+      - name: Asegurar que el Resource Group existe
+        run: az group create --name ${{ env.RG_DEV }} --location ${{ env.AZURE_LOCATION }}
 
       - name: Desplegar Infraestructura en Azure
         run: |
